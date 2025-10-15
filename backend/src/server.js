@@ -1,7 +1,9 @@
+import 'dotenv/config'; 
 import express from "express"
 import cors from "cors";
 import userRoutes from "./routes/user.route.js";
 import postRoutes from "./routes/post.route.js";
+import commentRoutes from "./routes/comment.route.js";
 
 import { clerkMiddleware } from "@clerk/express";
 import { ENV } from "./config/env.js";
@@ -17,9 +19,10 @@ app.get("/", (req, res) => res.send("The server says HELLO!"));
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes)
 
 // error handling middleware
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ error: err.message || "Internal server error!"});
 });
@@ -33,5 +36,9 @@ const startServer = async () => {
     process.exit(1);
   }
 };
+
+console.log();
+console.log('Clerk Key:', process.env.CLERK_PUBLISHABLE_KEY ? 'Loaded ✓' : 'Missing ✗');
+console.log();
 
 startServer();
