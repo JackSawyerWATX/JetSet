@@ -29,7 +29,7 @@ export const arcjetMiddleware = async (req, res, next) => {
     }
 
     // check for spoofed bots
-    if (decision.results.some((result) => result.reason.isBot() && result.reason.isSpoffed())) {
+    if (decision.results.some((result) => result.reason.isBot() && result.reason.isSpoofed())) {
       return res.status(403).json({
         error: "Bot spoofing detected!",
         message: "Your request appears to be from a malicious bot."
