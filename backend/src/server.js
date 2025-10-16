@@ -34,7 +34,11 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(ENV.PORT, () => console.log("Server is running on PORT:", ENV.PORT));
+
+    // listen for local development
+    if (ENV.NODE_ENV != "production") {
+      app.listen(ENV.PORT, () => console.log("Server is running on PORT:", ENV.PORT))
+    };
   } catch (error) {
     console.error("Error starting server:", error);
     process.exit(1);
@@ -46,3 +50,5 @@ console.log('Clerk Key:', process.env.CLERK_PUBLISHABLE_KEY ? 'Loaded ✓' : 'Mi
 console.log();
 
 startServer();
+
+export default app;
