@@ -1,9 +1,10 @@
 import { useSocialAuth } from "@/hooks/useSocialAuth";
 import "../../global.css"
-import { ActivityIndicator, Image, Text,  TouchableOpacity,  View } from "react-native";
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const {handleSocialAuth, isLoading} = useSocialAuth()
+
   return (
     <View className="flex-1 bg-white">
       <View className="flex-1 px-8 justify-between">
@@ -16,6 +17,7 @@ export default function Index() {
               resizeMode="contain"
               />
           </View>
+
           <View className="flex-col gap-2">
 
             { /* GOOGLE ICON */ }
@@ -73,7 +75,7 @@ export default function Index() {
                     className="size-10 mr-3"
                     resizeMode="contain"
                     />
-                    <Text className="text--black font-medium text-base">Continue with Apple</Text>
+                    <Text className="text-black font-medium text-base">Continue with Apple</Text>
                 </View>
                   ) }
             </TouchableOpacity>
